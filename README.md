@@ -14,7 +14,7 @@ While I think the bulk of the work for this project will be in understanding, de
 2. Understand and design a reasonable GNN model.
 4. Train this model on the GEOS-CF dataset and make any predictions at all (even poor ones).
 5. Make informed edits to the model to improve forecasting accuracy.
-6. Write an academic paper documenting the model and its results.
+6. Write an academic paper documenting our model/results and submit it for publication.
 
 ## Works Cited
 [1] Keller, C. A., Knowland, K. E., Duncan, B. N., Liu, J., Anderson, D. C., Das, S., ... & Pawson, S. (2021). Description of the NASA GEOS composition forecast modeling system GEOS‐CF v1. 0. Journal of Advances in Modeling Earth Systems, 13(4), e2020MS002413.
