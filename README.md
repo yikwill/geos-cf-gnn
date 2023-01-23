@@ -11,8 +11,10 @@ Longer term goals of this project would be to investigate methods for adding phy
 
 ## Project Goals
 1. Explore and make use of the NASA's GEOS-CF database of atmospheric composition. Make informed decisions on manipulating the data (e.g., upscaling).
-2. Understand GNNs and successfully design a reasonable model.
-3. Train this model on the GEOS-CF dataset and make any predictions at all (even poor ones).
+2. Understand GNNs and motivations for using them in forecasting tasks.
+3. Design a reasonable GNN model.
+4. Train this model on the GEOS-CF dataset and make any predictions at all (even poor ones).
+5. Make informed edits to the model to improve forecasting accuracy.
 
 ## Works Cited
 [1] Keller, C. A., Knowland, K. E., Duncan, B. N., Liu, J., Anderson, D. C., Das, S., ... & Pawson, S. (2021). Description of the NASA GEOS composition forecast modeling system GEOS‐CF v1. 0. Journal of Advances in Modeling Earth Systems, 13(4), e2020MS002413.
