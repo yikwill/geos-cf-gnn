@@ -9,12 +9,14 @@ One type of machine learning model that has gained traction in recent years for 
 
 While I think the bulk of the work for this project will be in understanding, designing, and training a reasonable GNN emulator, a potential longer term goal of this project would be to investigate methods for adding physical constraints into the GNN, as neural networks do not necessarily follow laws of physics such as mass conservation out of the box. Ensuring that neural networks are properly physically constrained is a rich research area in data-driven climate science communities [7]. Additionally, should the project succeed, I have a personal goal of writing an academic paper and submitting it for publication to a conference or journal.
 
+[Sam Silva](https://www.samjsilva.com/), my research advisor and Professor of Earth Sciences and Civil and Environmental Engineering at USC, has graciously offerred to provide guidance for this project. He is an expert in computational atmospheric chemistry, and he has ongoing projects applying graph networks to atmopsheric science. His level of involvment will likely depend on how much progress we make on our own and how often we get stuck.
+
 ## Project Goals
 1. Explore and make use of the NASA's GEOS-CF database of atmospheric composition. Make informed decisions on manipulating the data (e.g., upscaling).
 2. Understand and design a reasonable GNN model.
 4. Train this model on the GEOS-CF dataset and make any predictions at all (even poor ones).
 5. Make informed edits to the model to improve forecasting accuracy.
-6. Write an academic paper documenting the model and its results.
+6. Write an academic paper documenting our model/results and submit it for publication.
 
 ## Works Cited
 [1] Keller, C. A., Knowland, K. E., Duncan, B. N., Liu, J., Anderson, D. C., Das, S., ... & Pawson, S. (2021). Description of the NASA GEOS composition forecast modeling system GEOS‐CF v1. 0. Journal of Advances in Modeling Earth Systems, 13(4), e2020MS002413.
