@@ -3,7 +3,7 @@
 ![](images/geos_cf_surface_no2.png)
 
 <center>
-  src="images/geos_cf_surface_no2.png">
+  <img src="images/geos_cf_surface_no2.png">
 </center>
 
 ## Project Description 
