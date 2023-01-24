@@ -3,7 +3,7 @@
 ![](images/geos_cf_surface_no2.png)
 
 <p align="center">
-  <img width="460" height="300" src=![](images/geos_cf_surface_no2.png)>
+  src="images/geos_cf_surface_no2.png">
 </p>
 
 ## Project Description 
