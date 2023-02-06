@@ -20,6 +20,9 @@ While I think the bulk of the work for this project will be in understanding, de
 5. Make informed edits to the model to improve forecasting accuracy.
 6. Write an academic paper documenting our model/results and submit it for publication.
 
+## Ethical Sweep
+At a high level, this work may help provide accurate forecast models which can help promote global health and awareness for changes in climate. This work can help these causes and has close to no negative use cases. Current approaches use fully integrated chemistry models and simulations in order to forecast composition. Due to the complexity in forecasting a limited GNN may not provide accurate results for forecasting and may require additional data. Our team consists of computer science majors with semi similar backgrounds with a few outliers. It is not as diverse as I would hope for, in part as the topic is not easily approachable. To handle mistakes, we will discuss them during project meetings and go over miscommunications in person for diving tasks. Additionally, we may check over each others work to pre emptively catching errors.
+
 ## Works Cited
 [1] Keller, C. A., Knowland, K. E., Duncan, B. N., Liu, J., Anderson, D. C., Das, S., ... & Pawson, S. (2021). Description of the NASA GEOS composition forecast modeling system GEOS‐CF v1. 0. Journal of Advances in Modeling Earth Systems, 13(4), e2020MS002413.
 
