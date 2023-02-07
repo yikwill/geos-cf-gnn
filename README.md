@@ -10,15 +10,15 @@
 
 <b> Problem Introduction: </b> Highly concentrated air pollutants are widespread across the globe and have been linked to negative health outcomes for a variety of different populations.
 
-<b> GEOS-CF Introduction: </b> The Goddard Earth Observing System composition forecast (GEOS-CF) is NASA's state-of-the-art modeling system for global atmospheric composition.
+<b> GEOS-CF Overview: </b> The Goddard Earth Observing System composition forecast (GEOS-CF) is NASA's state-of-the-art modeling system for global atmospheric composition.
 
 <b> Graph Neural Network Introduction: </b> Graph neural networks, which utilize the structures and properties of graphs to successfully model complex systems, have been highly successful in emulating global atmospheric and weather conditions.
 
-<b> Methods Overview: </b> Broadly, we developed a GNN and trained it on the GEOS-CF dataset.
+<b> Methods Overview: </b> Broadly, we developed and trained a GNN on the GEOS-CF dataset to predict future distributions of air pollutants such as ozone.
 
 <b> Details of Data Collection: </b> The main technical challenge we faced during this project was in developing an accurate, well-trained GNN.
 
-<b> Conclusions: </b> Ideally, our model is able to draw on old climate data to make accurate predictions about air quality in various regions around the world.
+<b> Conclusions: </b> Ideally, our model will be able to draw on old atmospheric composition data to make accurate predictions about air quality in various regions around the world.
 
 ## Ethical Sweep
 At a high level, this work may help provide accurate forecast models which can help promote global health and awareness for changes in climate. This work can help these causes and has close to no negative use cases. Current approaches use fully integrated chemistry models and simulations in order to forecast composition. Due to the complexity in forecasting a limited GNN may not provide accurate results for forecasting and may require additional data. Our team consists of a mix of computer science, math, and environmental analysis majors with semi-similar backgrounds, but a few outliers. It is not as diverse as I would hope for, in part as the topic is not easily approachable. To handle mistakes, we will discuss them during project meetings and go over miscommunications in person for diving tasks. Additionally, we may check over each others work to pre emptively catching errors.
@@ -32,7 +32,7 @@ One type of machine learning model that has gained traction in recent years for 
 
 While I think the bulk of the work for this project will be in understanding, designing, and training a reasonable GNN emulator, a potential longer term goal of this project would be to investigate methods for adding physical constraints into the GNN, as neural networks do not necessarily follow laws of physics such as mass conservation out of the box. Ensuring that neural networks are properly physically constrained is a rich research area in data-driven climate science communities [7]. Additionally, should the project succeed, I have a personal goal of writing an academic paper and submitting it for publication to a conference or journal.
 
-[Sam Silva](https://www.samjsilva.com/), my research advisor and Professor of Earth Sciences and Civil and Environmental Engineering at USC, has graciously offerred to provide guidance for this project. He is an expert in computational atmospheric chemistry, and he has ongoing projects applying graph networks to atmopsheric science. His level of involvment will likely depend on how much progress we make on our own and how often we get stuck.
+[Sam Silva](https://www.samjsilva.com/), Professor of Earth Sciences and Civil and Environmental Engineering at USC, has graciously offerred to provide guidance for this project. He is an expert in computational atmospheric chemistry, and he has ongoing projects applying graph networks to atmopsheric science. His level of involvment will likely depend on how much progress we make on our own and how often we get stuck.
 
 ## Project Goals
 1. Explore and make use of the NASA's GEOS-CF database of atmospheric composition. Make informed decisions on manipulating the data (e.g., upscaling).
