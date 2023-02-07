@@ -4,6 +4,27 @@
   <img src="images/geos_cf_surface_no2.png">
 </center>
 
+## Introduction Outline
+
+<b> Team Members: </b> Alex Fay, Elly Rokeach, Francine Wright, Ryan O'Hara, William Yik
+
+<b> Problem Introduction: </b> Highly concentrated air pollutants are widespread across the globe and have been linked to negative health outcomes for a variety of different populations.
+
+<b> GEOS-CF Introduction: </b> The Goddard Earth Observing System composition forecast (GEOS-CF) is NASA's state-of-the-art modeling system for global atmospheric composition.
+
+<b> Graph Neural Network Introduction: </b> Graph neural networks, which utilize the structures and properties of graphs to successfully model complex systems, have been highly successful in emulating global atmospheric and weather conditions.
+
+<b> Methods Overview: </b> Broadly, we developed a GNN and trained it on the GEOS-CF dataset.
+
+<b> Details of Data Collection: </b> The main technical challenge we faced during this project was in developing an accurate, well-trained GNN.
+
+<b> Conclusions: </b> Ideally, our model is able to draw on old climate data to make accurate predictions about air quality in various regions around the world.
+
+## Ethical Sweep
+At a high level, this work may help provide accurate forecast models which can help promote global health and awareness for changes in climate. This work can help these causes and has close to no negative use cases. Current approaches use fully integrated chemistry models and simulations in order to forecast composition. Due to the complexity in forecasting a limited GNN may not provide accurate results for forecasting and may require additional data. Our team consists of a mix of computer science, math, and environmental analysis majors with semi-similar backgrounds, but a few outliers. It is not as diverse as I would hope for, in part as the topic is not easily approachable. To handle mistakes, we will discuss them during project meetings and go over miscommunications in person for diving tasks. Additionally, we may check over each others work to pre emptively catching errors.
+
+There is a chance we see different error rates for different sub-groups. In this project, sub-groups will be split geographically (e.g. we may have a set of data from western North America, another set from east Asia, etc.); if NASA's GEOS-CF database has not equally sampled from all across the world, then it is possible that some sub-groups with less overall data will have larger error rates due to undertraining on our model. With that said, GEOS-CF holds a fairly mature, developed dataset that has been built by diverse groups of researchers from around the world, so it seems likely that any severe discrepancies in sub-group sampling size have been dealt with by now. One potential path for data misinterpretation could occur when we train our graph neural network. GNN's function by exchanging information with their neighbors; therefore, if individual nodes in the GNN are trained on poor datasets, there is a risk that they decrease the accuracy of neighboring nodes with their own incorrect conclusions and incomplete datasets. A mistake like this could have cascading effects on our entire GNN and severely limit our ability to meaningfully analyze global atmospheric conditons. Preventing this issue goes back to making sure we train our neural network on a good dataset (and, relatedly, taking care to measure the performance of individual nodes and layers, rather than just looking at the GNN as a whole). Fortunately, our GNN deals exclusively with high-level, impersonal atmospheric data, leaving little room for infringing on others' privacy. The only potential privacy risk could come from inadvertently revealing the name of an individual who contributed data to the GEOS-CF dataset (if such data is even recorded by NASA's database).
+
 ## Project Description 
 The Goddard Earth Observing System composition forecast (GEOS-CF) is NASA's state-of-the-art modeling system for global atmospheric composition [1]. It provides high resolution global forecasts of several chemical species including ozone (O<sub>3</sub>), nitrogen dioxide (NO<sub>2</sub>), and carbon monoxide (CO). Several of these chemicals are air pollutants and/or aersols which have tangible impacts for people around the world. Thus, providing accurate forecasts of their global distribution is key for global health and infrastructure. During the past few years, the development of large global weather, climate, and atmospheric composition models like GEOS-CF which are based on physical laws and differential equations has motivated the creation of machine learning systems which emulate these models [2,3]. The goal of such emulators is to achieve the prediction accuracies of physical models at a fraction of the cost. 
 
@@ -19,9 +40,6 @@ While I think the bulk of the work for this project will be in understanding, de
 4. Train this model on the GEOS-CF dataset and make any predictions at all (even poor ones).
 5. Make informed edits to the model to improve forecasting accuracy.
 6. Write an academic paper documenting our model/results and submit it for publication.
-
-## Ethical Sweep
-At a high level, this work may help provide accurate forecast models which can help promote global health and awareness for changes in climate. This work can help these causes and has close to no negative use cases. Current approaches use fully integrated chemistry models and simulations in order to forecast composition. Due to the complexity in forecasting a limited GNN may not provide accurate results for forecasting and may require additional data. Our team consists of computer science majors with semi similar backgrounds with a few outliers. It is not as diverse as I would hope for, in part as the topic is not easily approachable. To handle mistakes, we will discuss them during project meetings and go over miscommunications in person for diving tasks. Additionally, we may check over each others work to pre emptively catching errors.
 
 ## Works Cited
 [1] Keller, C. A., Knowland, K. E., Duncan, B. N., Liu, J., Anderson, D. C., Das, S., ... & Pawson, S. (2021). Description of the NASA GEOS composition forecast modeling system GEOS‐CF v1. 0. Journal of Advances in Modeling Earth Systems, 13(4), e2020MS002413.
