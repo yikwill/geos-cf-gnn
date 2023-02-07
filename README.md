@@ -20,6 +20,8 @@
 
 **Conclusions:** Ideally, our model will be able to draw on old atmospheric composition data to make accurate predictions about air quality in various regions around the world.
 
+**Future Directions:** In order to make our model more useful to the atmospheric science community, we hope to expand the number of parameters that our model is trained on.
+
 ## Ethical Sweep
 **General Considerations:** At a high level, this work may help provide accurate forecast models which can help promote global health and awareness for changes in climate. This work can help these causes and has close to no negative use cases. Current approaches use fully integrated physical chemistry models and simulations in order to forecast composition. Due to the complexity in forecasting a limited GNN may not provide accurate results for forecasting and may require additional data. Our team consists of a mix of computer science, math, and environmental analysis majors with semi-similar backgrounds, but a few outliers. It is not as diverse as we would hope for, in part because the topic is not easily approachable. To handle mistakes, we will discuss them during project meetings and go over miscommunications in person for dividing tasks. Additionally, we may check over each others work to preemptively catching errors.
 
