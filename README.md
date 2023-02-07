@@ -6,7 +6,7 @@
 
 ## Introduction Outline
 
-<b> Team Members: </b> Alex Fay, Elly Rokeach, Francine Wright, Ryan O'Hara, William Yik
+**Team Members:** Alex Fay, Elly Rokeach, Francine Wright, Ryan O'Hara, William Yik
 
 <b> Problem Introduction: </b> Highly concentrated air pollutants are widespread across the globe and have been linked to negative health outcomes for a variety of different populations.
 
