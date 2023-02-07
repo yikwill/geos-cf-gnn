@@ -6,19 +6,19 @@
 
 ## Introduction Outline
 
-<bold> Team Members: </bold> Alex Fay, Elly Rokeach, Francine Wright, Ryan O'Hara, William Yik
+<b> Team Members: </b> Alex Fay, Elly Rokeach, Francine Wright, Ryan O'Hara, William Yik
 
-<bold> Problem Introduction: </bold> Highly concentrated air pollutants are widespread across the globe and have been linked to negative health outcomes for a variety of different populations.
+<b> Problem Introduction: </b> Highly concentrated air pollutants are widespread across the globe and have been linked to negative health outcomes for a variety of different populations.
 
-<bold> GEOS-CF Introduction: </bold> The Goddard Earth Observing System composition forecast (GEOS-CF) is NASA's state-of-the-art modeling system for global atmospheric composition.
+<b> GEOS-CF Introduction: </b> The Goddard Earth Observing System composition forecast (GEOS-CF) is NASA's state-of-the-art modeling system for global atmospheric composition.
 
-<bold> Graph Neural Network Introduction: </bold> Graph neural networks, which utilize the structures and properties of graphs to successfully model complex systems, have been highly successful in emulating global atmospheric and weather conditions.
+<b> Graph Neural Network Introduction: </b> Graph neural networks, which utilize the structures and properties of graphs to successfully model complex systems, have been highly successful in emulating global atmospheric and weather conditions.
 
-<bold> Methods Overview: </bold> Broadly, we developed a GNN and trained it on the GEOS-CF dataset.
+<b> Methods Overview: </b> Broadly, we developed a GNN and trained it on the GEOS-CF dataset.
 
-<bold> Details of Data Collection: </bold> The main technical challenge we faced during this project was in developing an accurate, well-trained GNN.
+<b> Details of Data Collection: </b> The main technical challenge we faced during this project was in developing an accurate, well-trained GNN.
 
-<bold> Conclusions: </bold> Ideally, our model is able to draw on old climate data to make accurate predictions about air quality in various regions around the world.
+<b> Conclusions: </b> Ideally, our model is able to draw on old climate data to make accurate predictions about air quality in various regions around the world.
 
 ## Ethical Sweep
 At a high level, this work may help provide accurate forecast models which can help promote global health and awareness for changes in climate. This work can help these causes and has close to no negative use cases. Current approaches use fully integrated chemistry models and simulations in order to forecast composition. Due to the complexity in forecasting a limited GNN may not provide accurate results for forecasting and may require additional data. Our team consists of a mix of computer science, math, and environmental analysis majors with semi-similar backgrounds, but a few outliers. It is not as diverse as I would hope for, in part as the topic is not easily approachable. To handle mistakes, we will discuss them during project meetings and go over miscommunications in person for diving tasks. Additionally, we may check over each others work to pre emptively catching errors.
