@@ -10,6 +10,8 @@
 
 **Learning Mesh-Based Simulation With Graph Networks**. Mesh-based models are highly adaptive, efficient architectures for neural networks with the ability to quickly pass information between nodes in a graph neural network, resulting in a system that can perform highly accurate and efficient predictions about the dynamics of physical systems. This paper's authors found that mesh graphs are generalizable and can be accurately applied to numerous different systems (weather and particle dynamics among them), often with much lower error rates than mesh-free models. Link: https://arxiv.org/pdf/2010.03409v4.pdf
 
+**A Gentle Introduction to Neural Networks**. Neural networks have been combined with graphs to leverage spatial properties of graphs. Graph Neural networks are composed of vertex, edges, and global nodes where vertexes can be specified as directed or undirected. GNNs have been lervaged to cover a wide variety of projects including semantic language encodings, predicting bonds in molecules, and social networks. GNNs have also been encoded to widely model connections and figure out how information, ideas, or items interact with one another. This resource provides a few interactive exmaples along with more advanced introductions to GANs and Generative Modeling. 
+
 ## Introduction Outline
 
 **Team Members:** Alex Fay, Elly Rokeach, Francine Wright, Ryan O'Hara, William Yik
