@@ -1,4 +1,4 @@
-# Forecasting Global Atmospheric Composition with Graph Neural Networks
+# Forecasting Global Atmospheric Composition With Graph Neural Networks
 
 <center>
   <img src="images/geos_cf_surface_no2.png">
