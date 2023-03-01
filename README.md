@@ -2,7 +2,11 @@
   <img src="images/geos_cf_surface_no2.png">
 </center>
 
-[here](#related-works)
+# Table of Contents
+I. [Introduction](#introduction)
+II. [Related Works](#related-works)
+III. [References](#references)
+IV. [Appendix](#appendix)
 
 # Introduction
 The chemical composition of the atmosphere has tangible impacts for billions of people around the globe. It is tightly coupled with both surface air pollution levels, which are one of the leading environmental causes of death worldwide, and global climate change via mechanisms such as radiation scattering and aerosol-cloud interactions (GBD 2013 Risk Factors Collaborators et al. 2015; National Academies of Sciences, Engineering, and Medicine et al. 2016). As such, providing high resolution, accurate forecasts of global atmospheric composition is incredibly important for human health and infrastructure. The NASA Goddard Earth Observing System (GEOS) composition forecast modeling system, GEOS-CF, is the current state-of-the-art atmospheric composition forecasting system and runs near real-time simulations to provide high quality predictions. GEOS-CF is one of many recently developed Earth system models which predict various geophysical variables (e.g, chemical distributions, humidity, wind speed, etc.) using physical computer models that solve many governing equations on discrete physical grids. While such models have found success, it typically comes at the cost of speed and large computing requirements (Bauer et al. 2015). These tradeoffs have driven recent interest in developing machine learning (ML) models to both improve and speed up Earth system forecasts (Rasp et al. 2020; Watson-Parris et al. 2022). These machine learning are purely data-driven and seek to emulate the Earth system dynamics without the use of specific governing laws and equations.
@@ -60,8 +64,10 @@ Sanchez-Lengeling, B., E. Reif, A. Pearce, and A. B. Wiltschko, 2021: A gentle i
 
 Zhou, J., and Coauthors, 2020: Graph neural networks: A review of methods and applications. AI open, 1, 57–81.
 
-# Old Work
-## Related Works
+# Appendix
+## Old Work
+All text in this section is saved previous work. It may be ignored.
+### Related Works
 
 **(Keisler, R.) Forecasting Global Weather With Graph Neural Networks**. Graph neural networks are uniquely suited to modelling complex weather systems due to their ability to learn multi-resolution models (that is, output models with different degrees of forecast specificity depending on whether the model is being used to predict weather in a local town or large country) and more accurately modelling shifts in weather over user-defined time steps. The architecture built by the authors of this paper operates in three discrete steps: an encoder transforms some region of the world that we want to make predictions about into input vectors, a processor analyzes said input vectors, and a decoder maps the resulting output data back onto the physical map. Analysis of the model's accuracy revealed that it performs either better or at parity with cutting-edge physical (non-ML) weather forecasters, motivating the usage of neural networks in the atmospheric predictions space. Link: https://arxiv.org/pdf/2202.07575.pdf
 
@@ -75,7 +81,7 @@ Zhou, J., and Coauthors, 2020: Graph neural networks: A review of methods and ap
 
 **(Zhou et al.) Graph neural networks: A review of methods and applications** Graph neural networks are models that capture the dependence and high amount of relational data of graphs via message passing between the nodes of graphs. GNNs and their variants have had ground breaking performance in recent years. Models for GNNs are built using a variety of modules, including propagation modules, sampling modules, and pooling modules. The paper provides a variety of instantiations of these computational modules, more details for which could be found in the futher papers linked out. The paper outlines the design process for a GNN to be (1) Find the graph structure, as in what the nodes and edges will be, (2) specify graph type and scale, i.e. whether the graph is homogenous or heterogenous, directed or undirected, simply or dynamic, etc. (3) design the loss function, and finally (4) build the module using computational modules. The paper also explores analyses and applications of GNNs. Link: https://doi-org.ccl.idm.oclc.org/10.1016/j.aiopen.2021.01.001
 
-## Introduction Outline
+### Introduction Outline
 
 **Team Members:** Alex Fay, Elly Rokeach, Francine Wright, Ryan O'Hara, William Yik
 
@@ -93,7 +99,7 @@ Zhou, J., and Coauthors, 2020: Graph neural networks: A review of methods and ap
 
 **Future Directions:** In order to make our model more useful to the atmospheric science community, we hope to expand the number of parameters that our model is trained on.
 
-## Project Description 
+### Project Description 
 The Goddard Earth Observing System composition forecast (GEOS-CF) is NASA's state-of-the-art modeling system for global atmospheric composition [1]. It provides high resolution global forecasts of several chemical species including ozone (O<sub>3</sub>), nitrogen dioxide (NO<sub>2</sub>), and carbon monoxide (CO). Several of these chemicals are air pollutants and/or aersols which have tangible impacts for people around the world. Thus, providing accurate forecasts of their global distribution is key for global health and infrastructure. During the past few years, the development of large global weather, climate, and atmospheric composition models like GEOS-CF which are based on physical laws and differential equations has motivated the creation of machine learning systems which emulate these models [2,3]. The goal of such emulators is to achieve the prediction accuracies of physical models at a fraction of the cost. 
 
 One type of machine learning model that has gained traction in recent years for forecasting tasks is the graph neural network (GNN) [4,5]. These neural networks leverage the structure and properties of graphs and have been successfully applied to emulate global weather features such as temperature, humidity, and wind [6]. This recent success motivates my interest in applying GNNs to emulate the GEOS-CF forecasts. NASA has maintained an assimilated database atmopsheric composition of the Earth since 2018, which is a combination of model predictions and satellite observations. This data could be used to train a GNN, the predictions of which could be compared to the actual GEOS-CF model. If successful, this project could provide a computationally cheaper way to achieve similar results to the GEOS-CF model.
@@ -102,14 +108,14 @@ While I think the bulk of the work for this project will be in understanding, de
 
 [Sam Silva](https://www.samjsilva.com/), Professor of Earth Sciences and Civil and Environmental Engineering at USC, has graciously offerred to provide guidance for this project. He is an expert in computational atmospheric chemistry, and he has ongoing projects applying graph networks to atmopsheric science. His level of involvment will likely depend on how much progress we make on our own and how often we get stuck.
 
-## Project Goals
+### Project Goals
 1. Explore and make use of the NASA's GEOS-CF database of atmospheric composition. Make informed decisions on manipulating the data (e.g., upscaling).
 2. Understand and design a reasonable GNN model.
 4. Train this model on the GEOS-CF dataset and make any predictions at all (even poor ones).
 5. Make informed edits to the model to improve forecasting accuracy.
 6. Write an academic paper documenting our model/results and submit it for publication.
 
-## Works Cited
+### Works Cited
 [1] Keller, C. A., Knowland, K. E., Duncan, B. N., Liu, J., Anderson, D. C., Das, S., ... & Pawson, S. (2021). Description of the NASA GEOS composition forecast modeling system GEOS‐CF v1. 0. Journal of Advances in Modeling Earth Systems, 13(4), e2020MS002413.
 
 [2] Rasp, S., Dueben, P. D., Scher, S., Weyn, J. A., Mouatadid, S., & Thuerey, N. (2020). WeatherBench: a benchmark data set for data‐driven weather forecasting. Journal of Advances in Modeling Earth Systems, 12(11), e2020MS002203.
