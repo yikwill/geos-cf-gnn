@@ -7,11 +7,13 @@ I. [Introduction](#introduction)
 
 II. [Related Works](#related-works)
 
-III. [Ethical Sweep](#ethical-sweep)
+III. [Methods](#methods)
 
-IV. [References](#references)
+IV. [Ethical Sweep](#ethical-sweep)
 
-V. [Appendix](#appendix)
+V. [References](#references)
+
+VI. [Appendix](#appendix)
 
 # Introduction
 The chemical composition of the atmosphere has tangible impacts for billions of people around the globe. It is tightly coupled with both surface air pollution levels, which are one of the leading environmental causes of death worldwide, and global climate change via mechanisms such as radiation scattering and aerosol-cloud interactions (GBD 2013 Risk Factors Collaborators et al. 2015; National Academies of Sciences, Engineering, and Medicine et al. 2016). As such, providing high resolution, accurate forecasts of global atmospheric composition is incredibly important for human health, infrastructure, and climate change solutions. The NASA Goddard Earth Observing System (GEOS) composition forecast modeling system, GEOS-CF, is the current state-of-the-art atmospheric composition forecasting system and runs near real-time simulations to provide high quality predictions. GEOS-CF is one of many recently developed Earth system models which predict various geophysical variables (e.g, chemical distributions, humidity, wind speed, etc.) using physical computer models that solve many governing equations on discrete physical grids. While such models have found success, it typically comes at the cost of speed and large computing requirements (Bauer et al. 2015). These tradeoffs have driven recent interest in developing machine learning (ML) models to both improve and speed up Earth system forecasts (Rasp et al. 2020; Watson-Parris et al. 2022). These machine learning models are purely data-driven and seek to emulate the Earth system dynamics without the use of specific governing laws and equations.
@@ -36,6 +38,20 @@ Pfaff et al. build on more basic GNN models to build mesh-based models, which ar
 Keisler makes use of a mesh GNN model to learn from multi-resolution weather data make high resolution forecasts of various weather variables such as wind speed, humidity, and temperature. The architecture operates in three discrete steps: an encoder transforms some region of the world that we want to make predictions about into input vectors, a processor analyzes said input vectors, and a decoder maps the resulting output data back onto the physical map. Analysis of the model’s accuracy revealed that it performs either better or at parity with cutting-edge physical (non-ML) weather forecasters, motivating the usage of neural networks in the atmospheric predictions space.
 
 Lam et al. build on the GNN of Keisler to create a highly accurate model for 10-day weather forecasts. Like Keisler's architecture, they use an encode-process-decode structure. The encoder maps from the physical latitute/longitude space to a latent graph. The processor does computation on the latent graph, which has less nodes than the original latitute/longitude. Lastly, the decoder maps from the latent graph back to the latitute/longitude space to create a real forecast. The primary difference between this model and that of Keisler for weather forecasting is that the authors of this work use a multi-scale mesh icosahedron for the latent graph while Keisler uses a static resolution icosahedron. That is, they use multiple icosahedrons of different resolutions to create their latent graph which the processor does computation on. This allows them to effectively capture spatial relations in the data. The low resolution icosahedrons can capture long distance connections and the high resolution icosahedrons can capture local connections.
+
+# Methods
+
+We will train our model on NASA's GEOS Composition Forcasting (GEOS-CF) dataset. This data contains the atmospheric concentration of various compounds across the entire planet on hour intervals from January 2018 through today; one input vector will represent the concentrations for a single hour at a single global coordinate (with additional vectors for that time step representing concentrations spaced 0.25 degrees apart in both the latitude and longitude directions).
+
+Due to the sheer size of the dataset, we plan to initially train on a single compound for a one month period. Depending on time and our preliminary training results, we will expend and train on more time steps.
+
+Before passing our data into our neural network, we will normalize it, converting our data from a lognormal distribution to a normal distribution through the following equation (for arbitrary data point, x): x_norm = 1 / SD * (log(x + epsilon) - mean), where SD is the overall standard deviation of that hour's data, mean is the overall mean of that hour's data, and epsilon is 10^{-32} to prevent us from ever taking log(0).
+
+To load in training data, we will convert the normalized GEOS-CF data into a single csv file (where one column represents one hour for our chosen compound).
+
+This data is then passed into a graph neural network (GNN). The GNN is composed of three discrete layers: an encoder (which transforms the csv file into an icosahedron mesh graph), a processor (which will train the data: broadly, a GAT will be built and used to train on the mesh's edge attributes - which contain data on the connections between different nodes - while a GCN will be built and used to train and update each node's features), and a decoder (which will function as a reverse encoder and transform our mesh graph back into parseable, csv data).
+
+All of the above models are being built using PyTorch, PyTorch Geometric, and H3. Our network is largely modeled off of Ryan Keisler's "Forecasting Global Weather With Graph Neural Networks."
 
 # Ethical Sweep
 **General Considerations:** At a high level, this work may help provide accurate forecast models which can help promote global health and awareness for changes in climate. This work can help these causes and has close to no negative use cases. Current approaches use fully-integrated physical chemistry models and simulations in order to forecast composition. Due to the complexity in forecasting, a limited GNN may not provide accurate results for forecasting and may require additional data. Our team consists of a mix of computer science, math, and environmental analysis majors with semi-similar backgrounds, but a few outliers. It is not as diverse as we would hope for in terms of academic background, in part because the topic is not easily approachable. However, it seems we have different experiences and identities in terms of socioeconomic background, ethnicity, and gender. To handle mistakes, we will discuss them during project meetings and go over miscommunications in person for dividing tasks. Additionally, we may check over each other's work to preemptively catch errors.
