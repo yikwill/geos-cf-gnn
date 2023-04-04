@@ -62,7 +62,7 @@ We implemented Keisler's method by metalayering a MLP and GCN together in order 
 
 We expect to see lower loss and higher accuracy after implementing the GAT-GCN layered model. Additionally, we expect Keisler's method to extend well to our data for hour-long predictions. We also expect weight lernings to be related to geographical constraints and variables such as mountains, cities, and similar factors.
 
-For our initial results, we train a model on a weeks worth of data of one chemical, and then predict the chemical concentration at each latitude-longitude location 12 hours in advance. After training and analyzing the model's performance, we might extend the training data to be over several weeks, or lessen our time-step for the prediction in order to have more accurate results.
+For our initial results, we train a model on a weeks worth of data of one chemical, and then predict the chemical concentration at each latitude-longitude location 12 hours in advance. After training and analyzing the model's performance, we might extend the training data to be over several weeks, or lessen our time-step for the prediction in order to produce more accurate results.
 
 --- Picture of Results ---
 
