@@ -9,11 +9,13 @@ II. [Related Works](#related-works)
 
 III. [Methods](#methods)
 
-IV. [Ethical Sweep](#ethical-sweep)
+IV. [Discussion](#discussion)
 
-V. [References](#references)
+V. [Ethical Sweep](#ethical-sweep)
 
-VI. [Appendix](#appendix)
+VI. [References](#references)
+
+VII. [Appendix](#appendix)
 
 # Introduction
 The chemical composition of the atmosphere has tangible impacts for billions of people around the globe. It is tightly coupled with both surface air pollution levels, which are one of the leading environmental causes of death worldwide, and global climate change via mechanisms such as radiation scattering and aerosol-cloud interactions (GBD 2013 Risk Factors Collaborators et al. 2015; National Academies of Sciences, Engineering, and Medicine et al. 2016). As such, providing high resolution, accurate forecasts of global atmospheric composition is incredibly important for human health, infrastructure, and climate change solutions. The NASA Goddard Earth Observing System (GEOS) composition forecast modeling system, GEOS-CF, is the current state-of-the-art atmospheric composition forecasting system and runs near real-time simulations to provide high quality predictions. GEOS-CF is one of many recently developed Earth system models which predict various geophysical variables (e.g, chemical distributions, humidity, wind speed, etc.) using physical computer models that solve many governing equations on discrete physical grids. While such models have found success, it typically comes at the cost of speed and large computing requirements (Bauer et al. 2015). These tradeoffs have driven recent interest in developing machine learning (ML) models to both improve and speed up Earth system forecasts (Rasp et al. 2020; Watson-Parris et al. 2022). These machine learning models are purely data-driven and seek to emulate the Earth system dynamics without the use of specific governing laws and equations.
@@ -52,6 +54,17 @@ To load in training data, we will convert the normalized GEOS-CF data into a sin
 This data is then passed into a graph neural network (GNN). The GNN is composed of three discrete layers: an encoder (which transforms the csv file into an icosahedron mesh graph), a processor (which will train the data: broadly, a GAT will be built and used to train on the mesh's edge attributes - which contain data on the connections between different nodes - while a GCN will be built and used to train and update each node's features), and a decoder (which will function as a reverse encoder and transform our mesh graph back into parseable, csv data).
 
 All of the above models are being built using PyTorch, PyTorch Geometric, and H3. Our network is largely modeled off of Ryan Keisler's "Forecasting Global Weather With Graph Neural Networks."
+
+# Discussion
+We implemented two types of Graph Neural Networks: Graph Attention Networks and Graph Convolution Networks. GATs train to determine the proper update of weighting for each edge to update the data at the center node. GCNs focus on node level updates through doing a convolution sum of all incoming edges with pre determined weights. We metalayered a MLP and GCN together in order to see how Kiesler's method performs on our data. Similarly, we plan to add a similar layer with an MLP and GAT in order to see if GATs can outperform or boost performance through switching between saved weights of the GAT which are fed into the GCN for training.
+
+We expect to see lower loss and higher accuracy after implementing the GAT-GCN layered model. Additionally, we expect Keisler's method to extend well to our data for hour long predictions. We also expect weight lernings to be related to geographical constraints and variables such as mountains, cities, and similar factors. 
+
+For our initial results, we train a model on a weeks worth of data of one chemical and then predict 12 hours ahead of the final trained time what the expected chemical concentration will be for each locations. After training and analyzing performance, we may extend this training to be several weeks or lower our time prediction in order to have more realistic results.
+
+--- Picture of Results ---
+
+We found our loss decreased after ______ and ______. This was with the following hyperparamters and learning rates: _____________________________________________ . 
 
 # Ethical Sweep
 **General Considerations:** At a high level, this work may help provide accurate forecast models which can help promote global health and awareness for changes in climate. This work can help these causes and has close to no negative use cases. Current approaches use fully-integrated physical chemistry models and simulations in order to forecast composition. Due to the complexity in forecasting, a limited GNN may not provide accurate results for forecasting and may require additional data. Our team consists of a mix of computer science, math, and environmental analysis majors with semi-similar backgrounds, but a few outliers. It is not as diverse as we would hope for in terms of academic background, in part because the topic is not easily approachable. However, it seems we have different experiences and identities in terms of socioeconomic background, ethnicity, and gender. To handle mistakes, we will discuss them during project meetings and go over miscommunications in person for dividing tasks. Additionally, we may check over each other's work to preemptively catch errors.
