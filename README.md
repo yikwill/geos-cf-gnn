@@ -56,11 +56,13 @@ This data is then passed into a graph neural network (GNN). The GNN is composed 
 All of the above models are being built using PyTorch, PyTorch Geometric, and H3. Our network is largely modeled off of Ryan Keisler's "Forecasting Global Weather With Graph Neural Networks."
 
 # Discussion
-We implemented two types of Graph Neural Networks: Graph Attention Networks and Graph Convolution Networks. GATs train to determine the proper update of weighting for each edge to update the data at the center node. GCNs focus on node level updates through doing a convolution sum of all incoming edges with pre determined weights. We metalayered a MLP and GCN together in order to see how Kiesler's method performs on our data. Similarly, we plan to add a similar layer with an MLP and GAT in order to see if GATs can outperform or boost performance through switching between saved weights of the GAT which are fed into the GCN for training.
+We implemented two types of Graph Neural Networks: Graph Attention Networks and Graph Convolution Networks. GATs train to determine the proper update of weights for each edge to update the data at the center node. GCNs perform the node level updates by doing a convolution sum of all incoming edges with pre-determined weights.
 
-We expect to see lower loss and higher accuracy after implementing the GAT-GCN layered model. Additionally, we expect Keisler's method to extend well to our data for hour long predictions. We also expect weight lernings to be related to geographical constraints and variables such as mountains, cities, and similar factors. 
+We implemented Keisler's method by metalayering a MLP and GCN together in order to see how the model performs on our data. We plan to implement a similar metalayer with a GAT for the node updates and a GCN for the edge updates, in order to see if the ability to learn weights will increase performance.
 
-For our initial results, we train a model on a weeks worth of data of one chemical and then predict 12 hours ahead of the final trained time what the expected chemical concentration will be for each locations. After training and analyzing performance, we may extend this training to be several weeks or lower our time prediction in order to have more realistic results.
+We expect to see lower loss and higher accuracy after implementing the GAT-GCN layered model. Additionally, we expect Keisler's method to extend well to our data for hour-long predictions. We also expect weight lernings to be related to geographical constraints and variables such as mountains, cities, and similar factors.
+
+For our initial results, we train a model on a weeks worth of data of one chemical, and then predict the chemical concentration at each latitude-longitude location 12 hours in advance. After training and analyzing the model's performance, we might extend the training data to be over several weeks, or lessen our time-step for the prediction in order to have more accurate results.
 
 --- Picture of Results ---
 
