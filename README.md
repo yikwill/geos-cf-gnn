@@ -13,7 +13,7 @@ IV. [Discussion](#discussion)
 
 V. [Ethical Sweep](#ethical-sweep)
 
-VI. [Reflections](#reflections)
+VI. [Reflection](#reflection)
 
 VII. [References](#references)
 
