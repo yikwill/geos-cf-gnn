@@ -60,6 +60,18 @@ Data from January 1st, 2018 through March 31st, 2018 was used to train and valid
 
 But before training can begin, data is normalized so that all modeling occurs on a normally distributed dataset. To accomplish this, all NC4 files are fed into a normalization algorithm which calculates the overall mean and standard deviation of the dataset and uses these to convert each NO<sub>2</sub> concentration (that is, the approximately 1 million concentration values for each latitude, longitude pair for each of the approximately 2000 analyzed time steps) into a normally distributed value. This process was done with the following equation: $x_{norm}$ = $\frac{1}{stdev}$(log(x + $\epsilon$) - mean), where $\epsilon$ is $10^{-32}$, preventing us from ever taking the logarithm of 0. After normalizing all data, data is fed out of the normalization algorithm as a .nc file. Output data is formatted into a 3-dimensional table (with dimensions latitude, longitude, and time) containing some two billion normalized, float NO<sub>2</sub> concentrations in an approximately 8gb file.
 
+'''
+Dimensions:            (lon: 1440, lat: 721, time: 2160)
+Coordinates:
+  * lon                (lon) float64 -180.0 -179.8 -179.5 ... 179.2 179.5 179.8
+  * lat                (lat) float64 -90.0 -89.75 -89.5 ... 89.5 89.75 90.0
+  * time               (time) datetime64[ns] 2018-01-01T00:30:00 ... 2018-01-...
+Data variables:
+    NO2                (time, lev, lat, lon) float32 dask.array<chunksize=(1, 1, 721, 1440), meta=np.ndarray>
+    Var_NO2            (time, lev, lat, lon) float32 dask.array<chunksize=(2160, 1, 721, 1440), meta=np.ndarray>
+'''
+**Figure 2.** Dimensions and first several values of our normalized data.
+
 Data is then passed into a graph neural network (GNN). At a high level, the GNN is composed of three discrete layers: an encoder, which transforms the latitude/longitude gridded input data into a mesh graph, a processor, which updates features on the mesh graph, and a decoder, which functions as a reverse encoder by transforming the mesh back into parseable data on a latitude/longitude grid.
 
 As mentioned above, the encoder's primary role is to transform the lat/lon grid data into a form that can be computed by the GNN. The encoder takes as input a tuple containing information on the desired batch size, grid features, and grid feature dimensions. Each physical grid cell is mapped to a node on a level 2 icosahedron graph which has 5182 nodes (illustrated in the image below) to create a bipartite graph; one of the graph's partitions contains NO<sub>2</sub> concentrations at each spatial grid point while the other contains an icosahedron grid. An edge is constructed between a grid node and a physical node if a spatial location is closest to the chosen grid node; in short, each node in the mesh only contains information about nearby spatial points. Lastly, a simple MLP with 2 hidden layers of 16 neurons each, LayerNorm, and ReLU activation is used to learn the features of each node in the icosahedron mesh based on the lat/lon grid cells it is connected to in the bipartite graph.
