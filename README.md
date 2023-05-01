@@ -79,6 +79,7 @@ As mentioned above, the encoder's primary role is to transform the lat/lon grid 
 <center>
   <img src="images/m2_icosahedron.png">
 </center>
+**Figure 3.** Visual representation of the constructed icosahedron mesh.
 
 From here, the encoder passes the icosahedron mesh to the processor. The processor can be broken down into two subsections: a graph attention network (GAT) responsible for training on the mesh's edge attributes and a graph convolutional network (GCN), which trains and updates each node's features. While complex, the basic idea of these two components is that edge features are updated using information from nearby nodes, and node features are updated using information from nearby edges. The processor passes over the mesh several times, exchanging information in each node with the node's neighbors. This process is called "message passing", and it allows nodes to gather information from other nodes which are far away given enough rounds information exchange. Throughout this process, the node's features change in response to the information being fed from neighboring nodes, allowing the system to make predictions about NO<sub>2</sub> concentrations in a given area based on NO<sub>2</sub> concentrations in the surrounding area.
 
