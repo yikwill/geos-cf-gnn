@@ -61,22 +61,22 @@ Data from January 1st, 2018 through March 31st, 2018 was used to train and valid
 But before training can begin, data is normalized so that all modeling occurs on a normally distributed dataset. To accomplish this, all NC4 files are fed into a normalization algorithm which calculates the overall mean and standard deviation of the dataset and uses these to convert each initial concentration (that is, the approximately 5 million concentration values for each compound in each latitude, longitude pair for each of the approximately 2000 analyzed time steps) into a normally distributed value. For all compounds except O<sub>3</sub>, this process was done with the following equation: $x_{norm}$ = $\frac{1}{stdev}$(log(x + $\epsilon$) - mean), where $\epsilon$ is $10^{-32}$, preventing us from ever taking the logarithm of 0. Ozone, meanwhile, was not lognorammly distributed; therefore, all concentrations were scaled by 4 $\times$ $10^{6}$ to keep all values within [0, 1]. After normalizing all data, data is fed out of the normalization algorithm as a .nc file. Output data is formatted into a 3-dimensional table (with dimensions latitude, longitude, and time) containing some two billion normalized, float NO<sub>2</sub> concentrations in an approximately 8gb file.
 
 ```
-Dimensions:            (lon: 1440, lat: 721, time: 2160)
+Dimensions:            (lon: 359, lat: 180, time: 2160)
 Coordinates:
-  * lon                (lon) float64 -180.0 -179.8 -179.5 ... 179.2 179.5 179.8
-  * lat                (lat) float64 -90.0 -89.75 -89.5 ... 89.5 89.75 90.0
+  * lon                (lon) float64 -180.0 -179.0 -178.0 ... 177.0 178.0 179.0
+  * lat                (lat) float64 -90.0 -89.0 -88.0 ... 88.0 89.0 90.0
   * time               (time) datetime64[ns] 2018-01-01T00:30:00 ... 2018-01-...
 Data variables:
-    CO                 (time, lev, lat, lon) float32 dask.array<chunksize=(1, 1, 721, 1440), meta=np.ndarray>
-    NO2                (time, lev, lat, lon) float32 dask.array<chunksize=(1, 1, 721, 1440), meta=np.ndarray>
-    O3                 (time, lev, lat, lon) float32 dask.array<chunksize=(1, 1, 721, 1440), meta=np.ndarray>
-    PM25_RH35_GCC      (time, lev, lat, lon) float32 dask.array<chunksize=(1, 1, 721, 1440), meta=np.ndarray>
-    SO2                (time, lev, lat, lon) float32 dask.array<chunksize=(1, 1, 721, 1440), meta=np.ndarray>
-    Var_CO             (time, lev, lat, lon) float32 dask.array<chunksize=(2160, 1, 721, 1440), meta=np.ndarray>
-    Var_NO2            (time, lev, lat, lon) float32 dask.array<chunksize=(2160, 1, 721, 1440), meta=np.ndarray>
-    Var_O3             (time, lev, lat, lon) float32 dask.array<chunksize=(2160, 1, 721, 1440), meta=np.ndarray>
-    Var_PM25_RH35_GCC  (time, lev, lat, lon) float32 dask.array<chunksize=(2160, 1, 721, 1440), meta=np.ndarray>
-    Var_SO2            (time, lev, lat, lon) float32 dask.array<chunksize=(2160, 1, 721, 1440), meta=np.ndarray>
+    CO                 (time, lev, lat, lon) float32 dask.array<chunksize=(1, 1, 359, 180), meta=np.ndarray>
+    NO2                (time, lev, lat, lon) float32 dask.array<chunksize=(1, 1, 359, 180), meta=np.ndarray>
+    O3                 (time, lev, lat, lon) float32 dask.array<chunksize=(1, 1, 359, 180), meta=np.ndarray>
+    PM25_RH35_GCC      (time, lev, lat, lon) float32 dask.array<chunksize=(1, 1, 359, 180), meta=np.ndarray>
+    SO2                (time, lev, lat, lon) float32 dask.array<chunksize=(1, 1, 359, 180), meta=np.ndarray>
+    Var_CO             (time, lev, lat, lon) float32 dask.array<chunksize=(2160, 1, 359, 180), meta=np.ndarray>
+    Var_NO2            (time, lev, lat, lon) float32 dask.array<chunksize=(2160, 1, 359, 180), meta=np.ndarray>
+    Var_O3             (time, lev, lat, lon) float32 dask.array<chunksize=(2160, 1, 359, 180), meta=np.ndarray>
+    Var_PM25_RH35_GCC  (time, lev, lat, lon) float32 dask.array<chunksize=(2160, 1, 359, 180), meta=np.ndarray>
+    Var_SO2            (time, lev, lat, lon) float32 dask.array<chunksize=(2160, 1, 359, 180), meta=np.ndarray>
 ```
 **Figure 2.** Dimensions and first several values of our normalized data.
 
@@ -97,7 +97,7 @@ Finally, the mesh is passed through the decoder. The decoder is the functional o
 We used normalized MSE loss as the objective function, where both the prediction and target are divided by the variance of NO<sub>2</sub> concentrations in the training data before calculating MSE as usual. For the optimizer, we used AdamW with a learning rate of 0.001. This initial learning rate was selected arbitrarily, largely because we plan to add a learning rate scheduler in the near future (that is, the learning rate will change once validation loss stops decreasing). Under this current regime, one epoch takes approximately 8 minutes to run. All components of the network were designed using [PyTorch](https://pytorch.org/docs/stable/index.html) and [PyTorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/).
 
 # Discussion
-As previously discussed, we train our model on three months (Jan. 2018 - Mar. 2018) of NO<sub>2</sub> data. The train-validation-test split from the previous section resulted in 1296 samples for the training set, each a $721 \times 1440$ grid of atmospheric NO<sub>2</sub> composition. Given one of these samples, the goal is to predict the state of atmospheric NO<sub>2</sub> one hour later. We choose this amount of lead time since it is the time step used by the physical GEOS-CF model which we are attempting to emulate.
+As previously discussed, we train our model on three months (Jan. 2018 - Mar. 2018) of NO<sub>2</sub> data. The train-validation-test split from the previous section resulted in 1296 samples for the training set, each a $180 \times 359$ grid of atmospheric NO<sub>2</sub> composition. Given one of these samples, the goal is to predict the state of atmospheric NO<sub>2</sub> one hour later. We choose this amount of lead time since it is the time step used by the physical GEOS-CF model which we are attempting to emulate.
 
 Since the model is somewhat large and the inputs are high resolution, we use a batch size of 1. Any higher would cause the Google Colab GPUs we used to train the model to run out of memory. This small batch sized combined with the aforementioned model size and input resolution lead to extremely slow training, about 4 hours per epoch. As such, we were only able to train for 2 epochs. However, we observed extremely fast convergence of our model, with loss dropping from $\sim 4$ to $\sim 0.002$ within the first third of the first epoch and very little loss improvement with further training. We hypothesize that this extremely fast convergence is due in part to the high complexity of the model as well as the long lifetime of NO<sub>2</sub> in the atmosphere. Since NO<sub>2</sub> does not dissipate quickly, the global distribution of NO<sub>2</sub> at a given time does not differ highly from the distribution one hour later. Thus, despite only training for two epochs, our model shows good performance on the test set, which we discuss in the following paragraphs. In the future, we wish to investigate lowering the learning rate of the optimizer to see if further training is possible.
 
