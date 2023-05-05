@@ -1,6 +1,7 @@
 <center>
   <img src="images/geos_cf_surface_no2.png">
 </center>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 # Table of Contents
 I. [Introduction](#introduction)
