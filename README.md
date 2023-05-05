@@ -58,31 +58,26 @@ wget -i files.txt
 
 Data from January 1st, 2018 through March 31st, 2018 was used to train and validate this model. Different data sets were created from different sets of days: the first 18 days of each month made up the training set, the next 6 days were used in the validation set, and the remaining days composed the test set. This made sure that each data set contained data from different months, accounting for changing wind currents (and, as a consequence, changing aerosol concentrations) and making sure the model was exposed to as diverse a dataset as possible at every step of the training process. The model was designed to make predictions about aerial CO, NO<sub>2</sub>, O<sub>3</sub>, PM<sub>2.5</sub>, and SO<sub>2</sub>.
 
-But before training can begin, data is normalized so that all modeling occurs on a normally distributed dataset. To accomplish this, all NC4 files are fed into a normalization algorithm which calculates the overall mean and standard deviation of the dataset and uses these to convert each initial concentration (that is, the approximately 5 million concentration values for each compound in each latitude, longitude pair for each of the approximately 2000 analyzed time steps) into a normally distributed value. For all compounds except O<sub>3</sub>, this process was done with the following equation: <img src="https://latex.codecogs.com/svg.image?x_%7B%5Ctext%7Bnorm%7D%7D=%5Cfrac%7B1%7D%7B%5Csigma%7D(%5Cln(x&plus;%5Cepsilon)%20-%20%5Cmu)" /> , where ![equation](https://latex.codecogs.com/svg.image?%5Cepsilon) is 10^(-32), preventing us from ever taking the logarithm of 0. Ozone, meanwhile, was not lognorammly distributed; therefore, all concentrations were scaled by 4x10^6 to keep all values within [0, 1]. Data was also downsized to provide more accurate predictions; ultimately, we only fed in data for integer latitude and longitude values. After normalizing all data, data is fed out of the normalization algorithm as a .nc file. Output data is formatted into a 3-dimensional table (with dimensions latitude, longitude, and time) containing some two billion normalized, float compound concentrations in an approximately 8gb file.
+But before training can begin, data is normalized so that all modeling occurs on a normally distributed dataset. To accomplish this, all NC4 files are fed into a normalization algorithm which calculates the overall mean and standard deviation of the dataset and uses these to convert each initial concentration (that is, the approximately 5 million concentration values for each compound in each latitude, longitude pair for each of the approximately 2000 analyzed time steps) into a normally distributed value. For all compounds except O<sub>3</sub>, this process was done with the following equation: <img src="https://latex.codecogs.com/svg.image?x_%7B%5Ctext%7Bnorm%7D%7D=%5Cfrac%7B1%7D%7B%5Csigma%7D(%5Cln(x&plus;%5Cepsilon)%20-%20%5Cmu)" /> , where ![equation](https://latex.codecogs.com/svg.image?%5Cmu) and ![equation](https://latex.codecogs.com/svg.image?%5Csigma) are the mean and standard deviation of the natural log of the chemical, and ![equation](https://latex.codecogs.com/svg.image?%5Cepsilon) is 10^(-32) to prevent us from ever taking the logarithm of 0. Ozone, meanwhile, was not lognorammly distributed; therefore, all concentrations were scaled by 4x10^6 to keep all values within [0, 1]. Data was also upscaled by a factor of 4 to reduce its resolution for easier predictions. The final resoltuion was 180 latitude x 360 longitude. Output data is formatted into a 3-dimensional table (with dimensions latitude, longitude, and time) containing some two billion normalized, float compound concentrations in an approximately 8gb file.
 
 ```
-Dimensions:            (lon: 359, lat: 180, time: 2160)
+Dimensions:        (time: 2160, lat: 180, lon: 360)
 Coordinates:
-  * lon                (lon) float64 -180.0 -179.0 -178.0 ... 177.0 178.0 179.0
-  * lat                (lat) float64 -90.0 -89.0 -88.0 ... 88.0 89.0 90.0
-  * time               (time) datetime64[ns] 2018-01-01T00:30:00 ... 2018-01-...
+  * lon            (lon) float64 -179.6 -178.6 -177.6 ... 177.4 178.4 179.4
+  * lat            (lat) float64 -89.62 -88.62 -87.62 ... 87.38 88.38 89.38
+  * time           (time) datetime64[ns] 2018-01-01T00:30:00 ... 2018-03-31T2...
 Data variables:
-    CO                 (time, lev, lat, lon) float32 dask.array<chunksize=(1, 1, 359, 180), meta=np.ndarray>
-    NO2                (time, lev, lat, lon) float32 dask.array<chunksize=(1, 1, 359, 180), meta=np.ndarray>
-    O3                 (time, lev, lat, lon) float32 dask.array<chunksize=(1, 1, 359, 180), meta=np.ndarray>
-    PM25_RH35_GCC      (time, lev, lat, lon) float32 dask.array<chunksize=(1, 1, 359, 180), meta=np.ndarray>
-    SO2                (time, lev, lat, lon) float32 dask.array<chunksize=(1, 1, 359, 180), meta=np.ndarray>
-    Var_CO             (time, lev, lat, lon) float32 dask.array<chunksize=(2160, 1, 359, 180), meta=np.ndarray>
-    Var_NO2            (time, lev, lat, lon) float32 dask.array<chunksize=(2160, 1, 359, 180), meta=np.ndarray>
-    Var_O3             (time, lev, lat, lon) float32 dask.array<chunksize=(2160, 1, 359, 180), meta=np.ndarray>
-    Var_PM25_RH35_GCC  (time, lev, lat, lon) float32 dask.array<chunksize=(2160, 1, 359, 180), meta=np.ndarray>
-    Var_SO2            (time, lev, lat, lon) float32 dask.array<chunksize=(2160, 1, 359, 180), meta=np.ndarray>
+    CO             (time, lat, lon) float32 ...
+    NO2            (time, lat, lon) float32 ...
+    O3             (time, lat, lon) float32 ...
+    PM25_RH35_GCC  (time, lat, lon) float32 ...
+    SO2            (time, lat, lon) float32 ...
 ```
 **Figure 2.** Dimensions and first several values of our normalized data.
 
 Data is then passed into a graph neural network (GNN). At a high level, the GNN is composed of three discrete layers: an encoder, which transforms the latitude/longitude gridded input data into a mesh graph, a processor, which updates features on the mesh graph, and a decoder, which functions as a reverse encoder by transforming the mesh back into parseable data on a latitude/longitude grid.
 
-As mentioned above, the encoder's primary role is to transform the lat/lon grid data into a form that can be computed by the GNN. The encoder takes as input a tuple containing information on the desired batch size, grid features, and grid feature dimensions. Each physical grid cell is mapped to a node on a level 2 icosahedron graph which has 5182 nodes (illustrated in the image below) to create a bipartite graph; one of the graph's partitions contains the concentrations of each of the 5 chemicals at each spatial grid point while the other contains an icosahedron grid. An edge is constructed between a grid node and a physical node if a spatial location is closest to the chosen grid node; in short, each node in the mesh only contains information about nearby spatial points. Lastly, a simple MLP with 2 hidden layers of 16 neurons each, LayerNorm, and ReLU activation is used to learn the features of each node in the icosahedron mesh based on the lat/lon grid cells it is connected to in the bipartite graph.
+As mentioned above, the encoder's primary role is to transform the lat/lon grid data into a form that can be computed by the GNN. The encoder takes as input a tuple containing information on the desired batch size, grid features, and grid feature dimensions. Each physical grid cell is mapped to a node on a level 2 icosahedron graph which has 5182 nodes (illustrated in the image below) to create a bipartite graph; one of the graph's partitions contains the concentrations of each of the 5 chemicals at each spatial grid point while the other contains an icosahedron grid. An edge is constructed between a grid node and a physical node if a spatial location is closest to the chosen grid node; in short, each node in the mesh only contains information about nearby spatial points. Lastly, a simple MLP with 2 hidden layers of 256 neurons each, LayerNorm, and SiLU activation is used to learn the features of each node in the icosahedron mesh based on the lat/lon grid cells it is connected to in the bipartite graph.
 
 <center>
   <img src="images/m2_icosahedron.png">
