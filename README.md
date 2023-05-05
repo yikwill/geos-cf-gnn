@@ -100,6 +100,10 @@ We evaluate the model using Log MSE for NO<sub>2</sub>, SO<sub>2</sub>, CO, and 
 
 We also show below a visual summary of our model's predictions for PM<sub>2.5</sub> alongside the persistence forecast and true values. Absolute errors in prediction for persistence and the GNN are shown in the last two rows. Overall, we see that our model is able to better predict the global distribution of PM<sub>2.5</sub> than the persistence baseline.
 
+<center>
+  <img src="images/pm25_summary.png">
+</center>
+
 # Ethical Sweep
 **General Considerations:** At a high level, this work may help provide accurate forecast models which can help promote global health and awareness for changes in climate. This work can help these causes and has close to no negative use cases. Current approaches use fully-integrated physical chemistry models and simulations in order to forecast composition. Due to the complexity in forecasting, a limited GNN may not provide accurate results for forecasting and may require additional data. Our team consists of a mix of computer science, math, and environmental analysis majors with semi-similar backgrounds, but a few outliers. It is not as diverse as we would hope for in terms of academic background, in part because the topic is not easily approachable. However, it seems we have different experiences and identities in terms of socioeconomic background, ethnicity, and gender. To handle mistakes, we will discuss them during project meetings and go over miscommunications in person for dividing tasks. Additionally, we may check over each other's work to preemptively catch errors.
 
