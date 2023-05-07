@@ -99,6 +99,7 @@ Since the model is somewhat large and the inputs are high resolution, we used a 
 <center>
   <img src="images/loss_curves.png">
 </center>
+
 **Figure 4.** A graph of our training and validation loss per epoch. Both loss categories gradually decreases as more epochs pass.
 
 We evaluate the model using Log MSE for NO<sub>2</sub>, SO<sub>2</sub>, CO, and PM<sub>2.5</sub>, which is simply the MSE of the natural log of both the prediction and target. The motivation for this is that the actual concentrations of these chemicals are lognormally distributed, so evaluating and plotting raw concentrations as opposed to their logs yields relatively uninterpretable results. O<sub>3</sub> is evaluated using standard MSE because it is not lognormally distributed. This method of evaluation is also used in Geiss et al. 2022. We test our model using a 24 hour rollout forecast starting from 2018-01-25 00:30 UTC. This means we make a prediction for 2018-01-25 01:30 UTC, plug this back into our model to predict 2018-01-25 02:30 UTC, and so on for a full 24 hour forecast. For comparison, we use the *persistence* forecast, which says that the chemical concentrations at a given hour are the same as the concentrations 24 hours prior. This is a common baseline in the weather forecasting community since some variables tend to stay constant on daily timescales. Our GNN's errors for each chemical during each hour of this forecast are shown below alongside the persistence forecasts's errors. Overall, we see that our model accumulates larger errors with more and more autoregressive steps, which is to be expected. However, we are still able to consistently beat the persistence baseline for up to 12 hours, with some chemical predictions beating persistence for closer to 24 hours.
@@ -106,6 +107,7 @@ We evaluate the model using Log MSE for NO<sub>2</sub>, SO<sub>2</sub>, CO, and 
 <center>
   <img src="images/24hr_rollout_errors.png">
 </center>
+
 **Figure 5.** Comparison of the logarithmic mean squared error for persistence baselines and model forecasts for each compound at different time steps from our initial point (ranging from 0 to 24 hours). As the timestep increases, the model's MSE increases.
 
 We also show below a visual summary of our model's predictions for PM<sub>2.5</sub> alongside the persistence forecast and true values. Absolute errors in prediction for persistence and the GNN are shown in the last two rows. Overall, we see that our model is able to better predict the global distribution of PM<sub>2.5</sub> than the persistence baseline.
@@ -113,6 +115,7 @@ We also show below a visual summary of our model's predictions for PM<sub>2.5</s
 <center>
   <img src="images/pm25_summary.png">
 </center>
+
 **Figure 6.** Visual representation of the data in Figure 5 for PM 2.5.
 
 # Ethical Sweep
