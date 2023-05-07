@@ -94,23 +94,26 @@ We used normalized MSE loss as the objective function, where both the prediction
 # Discussion
 As previously discussed, we train our model on three months (Jan. 2018 - Mar. 2018) of NO<sub>2</sub> data. The train-validation-test split from the previous section resulted in 1296 samples for the training set, each a 180x360 grid of atmospheric NO<sub>2</sub> composition. Given one of these samples, the goal is to predict the state of atmospheric NO<sub>2</sub> one hour later. We choose this amount of lead time since it is the time step used by the physical GEOS-CF model which we are attempting to emulate.
 
-Since the model is somewhat large and the inputs are high resolution, we use a batch size of 1. Any higher would cause the Google Colab GPU we used to train the model to run out of memory (15 GBs). Colab was chosen because it provided large amounts of storage and memory in addition to convenient file sharing that fulfilled the computing needs of our project. This small batch sized combined with the aforementioned model size and input resolution lead to relatively slow training, about 25 minutes per epoch. Our model trained for 59 epochs before early stopping, and we show the loss curves below.
+Since the model is somewhat large and the inputs are high resolution, we used a batch size of 1. Any higher would cause the Google Colab GPU we used to train the model to run out of memory (15 GBs), so we didn't try any other sizes. Colab was chosen because it provided large amounts of storage and memory in addition to convenient file sharing that fulfilled the computing needs of our project. This small batch sized combined with the aforementioned model size and input resolution lead to relatively slow training, about 25 minutes per epoch. Our model trained for 59 epochs before early stopping, and we show the loss curves below.
 
 <center>
   <img src="images/loss_curves.png">
 </center>
+**Figure 4.** A graph of our training and validation loss per epoch. Both loss categories gradually decreases as more epochs pass.
 
 We evaluate the model using Log MSE for NO<sub>2</sub>, SO<sub>2</sub>, CO, and PM<sub>2.5</sub>, which is simply the MSE of the natural log of both the prediction and target. The motivation for this is that the actual concentrations of these chemicals are lognormally distributed, so evaluating and plotting raw concentrations as opposed to their logs yields relatively uninterpretable results. O<sub>3</sub> is evaluated using standard MSE because it is not lognormally distributed. This method of evaluation is also used in Geiss et al. 2022. We test our model using a 24 hour rollout forecast starting from 2018-01-25 00:30 UTC. This means we make a prediction for 2018-01-25 01:30 UTC, plug this back into our model to predict 2018-01-25 02:30 UTC, and so on for a full 24 hour forecast. For comparison, we use the *persistence* forecast, which says that the chemical concentrations at a given hour are the same as the concentrations 24 hours prior. This is a common baseline in the weather forecasting community since some variables tend to stay constant on daily timescales. Our GNN's errors for each chemical during each hour of this forecast are shown below alongside the persistence forecasts's errors. Overall, we see that our model accumulates larger errors with more and more autoregressive steps, which is to be expected. However, we are still able to consistently beat the persistence baseline for up to 12 hours, with some chemical predictions beating persistence for closer to 24 hours.
 
 <center>
   <img src="images/24hr_rollout_errors.png">
 </center>
+**Figure 5.** Comparison of the logarithmic mean squared error for persistence baselines and model forecasts for each compound at different time steps from our initial point (ranging from 0 to 24 hours). As the timestep increases, the model's MSE increases.
 
 We also show below a visual summary of our model's predictions for PM<sub>2.5</sub> alongside the persistence forecast and true values. Absolute errors in prediction for persistence and the GNN are shown in the last two rows. Overall, we see that our model is able to better predict the global distribution of PM<sub>2.5</sub> than the persistence baseline.
 
 <center>
   <img src="images/pm25_summary.png">
 </center>
+**Figure 6.** Visual representation of the data in Figure 5 for PM 2.5.
 
 # Ethical Sweep
 **General Considerations:** At a high level, this work may help provide accurate forecast models which can help promote global health and awareness for changes in climate. This work can help these causes and has close to no negative use cases. Current approaches use fully-integrated physical chemistry models and simulations in order to forecast composition. Due to the complexity in forecasting, a limited GNN may not provide accurate results for forecasting and may require additional data. Our team consists of a mix of computer science, math, and environmental analysis majors with semi-similar backgrounds, but a few outliers. It is not as diverse as we would hope for in terms of academic background, in part because the topic is not easily approachable. However, it seems we have different experiences and identities in terms of socioeconomic background, ethnicity, and gender. To handle mistakes, we will discuss them during project meetings and go over miscommunications in person for dividing tasks. Additionally, we may check over each other's work to preemptively catch errors.
