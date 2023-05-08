@@ -1,6 +1,4 @@
+markdown: kramdown
 theme: jekyll-theme-slate
 title: Forecasting Global Atmospheric Composition with Graph Neural Networks
 description: CS152 Project Website by Alex Fay, Elly Rokeach, Francine Wright, Ryan O’Hara, and William Yik
-markdown: kramdown
-kramdown:
-  math_engine: mathjax
