@@ -2,6 +2,9 @@
   <img src="images/geos_cf_surface_no2.png">
 </center>
 
+# Video Presentation
+You can watch our video presentation on this project [here](https://drive.google.com/file/d/1ZhPAoIZCohyi8EF_7oKClXYgk_EFc2m7/view?usp=sharing).
+
 # Table of Contents
 I. [Introduction](#introduction)
 
@@ -16,9 +19,6 @@ V. [Ethical Sweep](#ethical-sweep)
 VI. [Reflection](#reflection)
 
 VII. [References](#references)
-
-# Video Presentation
-You can watch our video presentation on this project [here](https://drive.google.com/file/d/1ZhPAoIZCohyi8EF_7oKClXYgk_EFc2m7/view?usp=sharing).
 
 # Abstract
 This project introduces a graph neural network (GNN) emulator of the [NASA GEOS-CF system](https://gmao.gsfc.nasa.gov/weather_prediction/GEOS-CF/) for forecasting global atmospheric composition. While the current NASA GEOS-CF system runs near real-time simulations, it is computationally expensive, and machine learning (ML) models can improve and speed up Earth system forecasts. The GNN emulator has an "encode-process-decode" architecture that transforms the original latitude-longitude data to a lower dimensional latent space, performs computations in this space, then reprojects back to the original latitude-longitude format for final predictions. The GNN learns on [publicly available GEOS-CF assimilated data](https://portal.nccs.nasa.gov/datashare/gmao/geos-cf/v1/das/) to make predictions on the global atmospheric composition of four chemical species (ozone, nitrogen dioxide, carbon monoxide, sulfur dioxide), and particulate matter (PM2.5). The model currently provides forecasts with 1 hour of lead time. This work is significant because atmospheric composition has tangible impacts on billions of people around the globe, and accurate forecasts of global atmospheric composition are crucial for human health, infrastructure, and climate change solutions.
