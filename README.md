@@ -3,7 +3,7 @@
 </center>
 
 # Video Presentation
-You can watch our video presentation on this project <a href="https://drive.google.com/file/d/1ZhPAoIZCohyi8EF_7oKClXYgk_EFc2m7/view?usp=sharing" target="_blank">here</a>.
+You can watch our video presentation on this project [here](https://drive.google.com/file/d/1ZhPAoIZCohyi8EF_7oKClXYgk_EFc2m7/view?usp=sharing).
 
 # Table of Contents
 I. [Introduction](#introduction)
